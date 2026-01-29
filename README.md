@@ -79,17 +79,3 @@ Vendors have been segmented into:
 )
 
 ---
-
-## 🚀 How to Run This Project
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/YOUR_USERNAME/Vendor-Performance-Analysis.git](https://github.com/YOUR_USERNAME/Vendor-Performance-Analysis.git)
-    ```
-2.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-3.  **Setup Database:** Update the `SERVER` name in the connection string inside the notebooks to your local SQL Server instance.
-4.  **Execute:** Run the notebooks in the numbered order (1 → 2 → 3).
-
----
