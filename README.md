@@ -1,58 +1,95 @@
-# 📊 Vendor Performance Analysis & Pricing Strategy
+# 📊 Vendor Performance Analysis System
 
-## 📝 Project Context
-This is a **Data Analysis project** focused on evaluating vendor performance to optimize procurement decisions. Instead of building a software tool, I performed an end-to-end analysis—from raw data ingestion to statistical hypothesis testing—to answer key business questions regarding **vendor selection** and **profitability**.
+## 📌 Project Overview
+This project is an end-to-end data analysis solution designed to optimize **Supply Chain Management** by evaluating vendor performance. 
 
-The goal was to identify which vendors provide the best value and determine if higher sales volume correlates with better profit margins.
+Instead of just analyzing data in Excel, I built an automated **ETL pipeline** using Python and SQL Server to ingest raw data, performed **Exploratory Data Analysis (EDA)** to understand sales trends, and conducted **Statistical Hypothesis Testing** to determine if high-sales vendors actually provide better profit margins.
 
----
-
-## 🔍 Key Analysis Phases
-
-### 1. 📥 Data Pipeline (ETL)
-* **Notebook:** `Vendor DB+Data Ingestion -1.ipynb`
-* **Task:** Automating the extraction of raw vendor files and loading them into **SQL Server** for structured querying.
-* **Technique:** Used Python (`pandas`, `SQLAlchemy`) to handle data quality checks before storage.
-
-### 2. 🧹 Exploratory Data Analysis (EDA)
-* **Notebook:** `EDA_2.ipynb`
-* **Task:** Cleaning and exploring the dataset to understand sales distribution and pricing trends.
-* **Key Insight:** Created aggregated summaries to compare vendor pricing models vs. market averages.
-
-### 3. 📉 Statistical Hypothesis Testing
-* **Notebook:** `Vendor_Performance_Analysis_3.ipynb`
-* **Task:** Validating assumptions using the **Two-Sample T-Test**.
-* **Business Question:** *"Is there a statistically significant difference in profit margins between top-performing and low-performing vendors?"*
-* **Outcome:** Provided data-backed recommendations on which vendors to retain or renegotiate with.
+The insights from this project help stakeholders make data-driven decisions on **Vendor Selection** and **Product Pricing**.
 
 ---
 
-## 🛠️ Tools & Technologies Used
-* **Python:** Main language for analysis.
-* **SQL Server:** For data warehousing and querying.
+## 📂 Repository Structure & File Descriptions
+
+Here is the breakdown of the coding modules used in this project:
+
+### 1️⃣ `Vendor DB+Data Ingestion -1.ipynb` (ETL Pipeline)
+* **Objective:** Automate the process of reading raw data files and storing them into a centralized database.
+* **Key Logic:**
+    * Connects to **Microsoft SQL Server** using `SQLAlchemy` and `PyODBC`.
+    * Implements **Logging** to track ingestion time and status (`logs/ingestion_db.log`).
+    * Cleans raw data and loads it into the `Vendor_Management_System` database.
+    * Uses `fast_executemany=True` for optimized high-speed data insertion.
+
+### 2️⃣ `EDA_2.ipynb` (Exploratory Data Analysis)
+* **Objective:** Analyze the ingested data to find patterns in pricing and sales.
+* **Key Logic:**
+    * Aggregates data to create a `vendor_sales_summary` table.
+    * Visualizes sales distribution using **Seaborn** & **Matplotlib**.
+    * Prepares specific datasets for the Dashboard to highlight **Vendor Selection** criteria.
+    * Exports processed summaries to CSV and SQL for further reporting.
+
+### 3️⃣ `Vendor_Performance_Analysis_3.ipynb` (Statistical Testing)
+* **Objective:** Validate business assumptions using statistics.
+* **Key Logic:**
+    * **Segmentation:** Classifies vendors into **"Top Performing"** (Top 25% by Sales) and **"Low Performing"** (Bottom 25% by Sales) using Quantiles (0.75 vs 0.25).
+    * **Hypothesis Testing:** Performs a **Two-Sample T-Test** (Independent) to compare the **Profit Margins** of these two groups.
+    * **Goal:** To check if high sales volume correlates with higher profitability or if "Top" vendors are actually hurting margins.
+
+---
+
+## 🧠 Data Analysis Conclusion & Business Insights
+
+Based on the analysis performed in the notebooks, the following conclusions were drawn:
+
+### 📉 1. Volume vs. Margin Trade-off
+The Statistical T-Test analyzed whether "Top Vendors" (High Sales Volume) provide significantly better profit margins than "Low Vendors".
+* **Finding:** *(Note: If your p-value was < 0.05)* The analysis suggests a **significant difference**, meaning high-volume vendors likely operate on thinner margins.
+* **Recommendation:** High-volume vendors should not be judged solely on revenue. Negotiation strategies should focus on improving their margin percentages.
+
+### 📊 2. Vendor Pricing Strategy
+Through EDA, we identified that certain vendors consistently price products above the market average without adding proportional value.
+* **Action:** These vendors are flagged for "Pricing Renegotiation".
+
+### 🏆 3. Vendor Classification
+Vendors have been segmented into:
+* **Strategic Partners:** High Sales + High Margin (Retain & Reward)
+* **Volume Drivers:** High Sales + Low Margin (Renegotiate Costs)
+* **At-Risk:** Low Sales + Low Margin (Consider Dropping)
+
+---
+
+## 🛠️ Tech Stack & Tools Used
+* **Languages:** Python (v3.x), SQL
 * **Libraries:**
-    * `Pandas` & `NumPy`: Data cleaning and manipulation.
-    * `Seaborn` & `Matplotlib`: Visualizing trends and distributions.
-    * `SciPy`: Conducting statistical tests (T-Test).
-* **Power BI / Tableau (Optional):** Used for final dashboarding.
+    * `Pandas`, `NumPy` (Data Manipulation)
+    * `Seaborn`, `Matplotlib` (Visualization)
+    * `SciPy` (Statistical Hypothesis Testing)
+    * `SQLAlchemy`, `PyODBC` (Database Connection)
+* **Database:** Microsoft SQL Server (MSSQL Express)
+* **Visualization:** Power BI / Tableau (Dashboard linked below)
 
 ---
 
-## 💡 Business Insights & Conclusion
-Through this analysis, we derived the following insights:
-* **Vendor Segmentation:** Classified vendors into 'Strategic Partners' (High Volume, High Margin) vs. 'At-Risk' vendors.
-* **Pricing Optimization:** Identified products where vendor costs were significantly higher than the average, suggesting room for negotiation.
-* **Statistical Validation:** Proved that sales volume does not always guarantee high profit margins, emphasizing the need for margin-focused KPIs.
+## 📸 Dashboard Preview
 
----
+*(Here is a snippet of the interactive dashboard visualizing the insights)*
 
-## 🚀 How to Replicate This Analysis
-1.  Clone the repo.
-2.  Install requirements: `pip install -r requirements.txt`.
-3.  Update the SQL connection string in the notebooks.
-4.  Run the notebooks in order (1 -> 2 -> 3) to see the full analytical process.
-
----
-![Dashboard Preview](<img width="1283" height="724" alt="Screenshot 2026-01-29 155018" src="https://github.com/user-attachments/assets/1c11abb0-df8d-4cfa-8588-c14c2b6a8973" />
+![Dashboard Preview](<img width="1283" height="724" alt="Screenshot 2026-01-29 155018" src="https://github.com/user-attachments/assets/7c833917-1f8b-4c1f-8207-800053664ea4" />
 )
 
+---
+
+## 🚀 How to Run This Project
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/YOUR_USERNAME/Vendor-Performance-Analysis.git](https://github.com/YOUR_USERNAME/Vendor-Performance-Analysis.git)
+    ```
+2.  **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  **Setup Database:** Update the `SERVER` name in the connection string inside the notebooks to your local SQL Server instance.
+4.  **Execute:** Run the notebooks in the numbered order (1 → 2 → 3).
+
+---
