@@ -66,11 +66,3 @@ By automating the **ETL pipeline with Python & SQL**, manual data entry errors w
 
 ---
 
-## 📸 Dashboard Preview
-
-*(Here is a snippet of the interactive dashboard visualizing the insights)*
-
-![Dashboard Preview](<img width="1283" height="724" alt="Screenshot 2026-01-29 155018" src="https://github.com/user-attachments/assets/7c833917-1f8b-4c1f-8207-800053664ea4"/>
-)
-
----
